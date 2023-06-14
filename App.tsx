@@ -2,31 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import TodoInput from './app/components/TodoInput/TodoInput'
-import TodoList from './app/components/TodoList/TodoList'
-
-type Todo = {
-  id: number
-  content: string
-  completed: boolean
-}
-
-function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <TodoInput />
-      <TodoList todos={TODOS} />
-    </View>
-  )
-}
-
-function DetailsScreen() {
-  return (
-    <View>
-      <Text>Details Screen</Text>
-    </View>
-  )
-}
+import HomeScreen from './app/screens/HomeScreen'
+import DetailScreen from './app/screens/DetailScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -35,26 +12,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="YPLabs" component={HomeScreen} />
-        <Stack.Screen name="ToDo" component={DetailsScreen} />
+        <Stack.Screen name="ToDo" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
-
-const TODOS: Todo[] = [
-  { id: 1, content: '할 일 1', completed: false },
-  { id: 2, content: '할 일 2', completed: true },
-  { id: 3, content: '할 일 3', completed: false },
-  { id: 4, content: '할 일 4', completed: false },
-  { id: 5, content: '할 일 5', completed: false },
-]
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-})
