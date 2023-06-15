@@ -16,9 +16,11 @@ const TodoModal = ({ isOpen, toggleModal }) => {
   }
 
   const addTodo = () => {
-    dispatch(addTodoStart(input))
-    setInput('')
-    onDismiss()
+    if (input.length > 0) {
+      dispatch(addTodoStart(input))
+      setInput('')
+      onDismiss()
+    }
   }
 
   const behavior =

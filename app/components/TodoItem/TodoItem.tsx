@@ -9,16 +9,26 @@ import { Todo } from '../../shared/types'
 
 type TodoItemProps = {
   todo: Todo
-  onToggle: (id: number) => void
 }
 
-function TodoItem(props: TodoItemProps) {
+function TodoItem({ todo }: TodoItemProps) {
   const dispatch = useDispatch()
+
+  const onPress = (id: number) => {
+    console.log('onPress', id)
+  }
 
   const onDelete = (id: number) => {
     dispatch(deleteTodoStart(id))
   }
-  return <TodoItemView {...props} onDelete={onDelete} />
+
+  const props = {
+    todo,
+    onPress,
+    onDelete,
+  }
+
+  return <TodoItemView {...props} />
 }
 
 export default TodoItem

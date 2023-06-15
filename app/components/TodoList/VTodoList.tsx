@@ -11,11 +11,7 @@ const VTodoList = ({ todos }: TodoListProps) => {
   return (
     <ScrollView style={styles.list}>
       {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggle={() => console.log('toggle')}
-        />
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ScrollView>
   )
