@@ -1,5 +1,4 @@
-import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, Text } from 'react-native'
 import TodoItem from '../TodoItem/TodoItem'
 
 type Todo = {
@@ -27,7 +26,9 @@ const VTodoList = ({ todos }: TodoListProps) => {
 }
 
 const styles = StyleSheet.create({
-  list: {},
+  list: {
+    width: '100%',
+  },
 })
 
 export default VTodoList

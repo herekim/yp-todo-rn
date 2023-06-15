@@ -1,7 +1,79 @@
-import React from 'react'
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Modal,
+  TouchableWithoutFeedback,
+} from 'react-native'
 
-const VTodoModal = () => {
-  return <div></div>
+import AddButton from '../Button/AddButton'
+
+type VTodlModal = {
+  isOpen: boolean
+  onDismiss: () => void
+  behavior: 'padding' | 'height' | 'position' | undefined
 }
+
+const VTodoModal = ({ isOpen, onDismiss, behavior }: VTodlModal) => {
+  return (
+    <Modal animationType="slide" transparent={true} visible={isOpen}>
+      <TouchableWithoutFeedback onPress={onDismiss}>
+        <KeyboardAvoidingView behavior={behavior} style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <TextInput
+              placeholder="새로운 할 일을 추가하세요."
+              style={styles.input}
+              autoFocus
+            />
+            <AddButton
+              style={styles.addButton}
+              size={40}
+              color="#3d67fc"
+              onPress={() => console.log('onPress!!!')}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </Modal>
+  )
+}
+
+const styles = StyleSheet.create({
+  addButton: {
+    borderRadius: 100,
+    backgroundColor: '#ffffff',
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    backgroundColor: '#F5F5F5',
+    color: '#000000',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  modalView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 15,
+    backgroundColor: '#ffffff',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+})
 
 export default VTodoModal

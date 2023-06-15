@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import Checkbox from 'expo-checkbox'
+import { FontAwesome } from '@expo/vector-icons'
 
 type Todo = {
   id: number
@@ -23,9 +24,7 @@ const VTodoItem = ({ todo, onToggle }: TodoItemProps) => {
             {todo.content}
           </Text>
         </View>
-        <TouchableOpacity style={styles.deleteButton}>
-          <Text style={styles.deleteText}>X</Text>
-        </TouchableOpacity>
+        <FontAwesome name="trash-o" size={20} color="lightgray" />
       </View>
     </TouchableOpacity>
   )
@@ -36,24 +35,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    gap: 10,
+    padding: 20,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 15,
+    marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   checkbox: {
-    marginRight: 15,
+    marginRight: 20,
+    borderColor: 'black',
   },
   content: {
     fontSize: 16,
     color: '#333',
   },
   completed: {
+    fontSize: 16,
     textDecorationLine: 'line-through',
     color: '#aaa',
   },

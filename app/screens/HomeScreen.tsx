@@ -2,7 +2,7 @@ import React from 'react'
 
 import { StyleSheet, View } from 'react-native'
 
-import TodoInput from '../components/TodoInput/TodoInput'
+import TodoModalTrigger from '../components/TodoModalTrigger/TodoModalTrigger'
 import TodoList from '../components/TodoList/TodoList'
 
 type Todo = {
@@ -14,8 +14,8 @@ type Todo = {
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <TodoInput />
       <TodoList todos={TODOS} />
+      <TodoModalTrigger />
     </View>
   )
 }
@@ -23,11 +23,16 @@ const HomeScreen = () => {
 export default HomeScreen
 
 const TODOS: Todo[] = [
-  { id: 1, content: '할 일 1', completed: false },
-  { id: 2, content: '할 일 2', completed: true },
-  { id: 3, content: '할 일 3', completed: false },
-  { id: 4, content: '할 일 4', completed: false },
-  { id: 5, content: '할 일 5', completed: false },
+  { id: 1, content: '웨이트 1시간', completed: false },
+  { id: 2, content: '영어공부 30분', completed: true },
+  { id: 3, content: 'React Native 공부', completed: false },
+  { id: 4, content: 'Todo List 앱 만들기', completed: false },
+  { id: 5, content: '알고리즘 공부', completed: false },
+  { id: 6, content: '웨이트 1시간', completed: false },
+  { id: 7, content: '영어공부 30분', completed: true },
+  { id: 8, content: 'React Native 공부', completed: false },
+  { id: 9, content: 'Todo List 앱 만들기', completed: false },
+  { id: 10, content: '알고리즘 공부', completed: false },
 ]
 
 const styles = StyleSheet.create({
