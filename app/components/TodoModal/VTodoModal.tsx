@@ -13,9 +13,19 @@ type VTodlModal = {
   isOpen: boolean
   onDismiss: () => void
   behavior: 'padding' | 'height' | 'position' | undefined
+  addTodo: () => void
+  inputValue: string
+  setInputValue: (newValue: string) => void
 }
 
-const VTodoModal = ({ isOpen, onDismiss, behavior }: VTodlModal) => {
+const VTodoModal = ({
+  isOpen,
+  onDismiss,
+  behavior,
+  addTodo,
+  inputValue,
+  setInputValue,
+}: VTodlModal) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isOpen}>
       <TouchableWithoutFeedback onPress={onDismiss}>
@@ -24,13 +34,15 @@ const VTodoModal = ({ isOpen, onDismiss, behavior }: VTodlModal) => {
             <TextInput
               placeholder="새로운 할 일을 추가하세요."
               style={styles.input}
+              value={inputValue}
+              onChangeText={setInputValue}
               autoFocus
             />
             <AddButton
               style={styles.addButton}
               size={40}
               color="#3d67fc"
-              onPress={() => console.log('onPress!!!')}
+              onPress={addTodo}
             />
           </View>
         </KeyboardAvoidingView>

@@ -1,10 +1,6 @@
 import VTodoList from './VTodoList'
 
-type Todo = {
-  id: number
-  content: string
-  completed: boolean
-}
+import { Todo } from '../../shared/types'
 
 type TodoListProps = {
   todos: Todo[]

@@ -3,18 +3,15 @@ import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import Checkbox from 'expo-checkbox'
 import { FontAwesome } from '@expo/vector-icons'
 
-type Todo = {
-  id: number
-  content: string
-  completed: boolean
-}
+import { Todo } from '../../shared/types'
 
 type TodoItemProps = {
   todo: Todo
   onToggle: (id: number) => void
+  onDelete: (id: number) => void
 }
 
-const VTodoItem = ({ todo, onToggle }: TodoItemProps) => {
+const VTodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
   return (
     <TouchableOpacity onPress={() => onToggle(todo.id)}>
       <View style={styles.item}>
@@ -24,7 +21,9 @@ const VTodoItem = ({ todo, onToggle }: TodoItemProps) => {
             {todo.content}
           </Text>
         </View>
-        <FontAwesome name="trash-o" size={20} color="lightgray" />
+        <TouchableOpacity onPress={() => onDelete(todo.id)}>
+          <FontAwesome name="trash-o" size={20} color="lightgray" />
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   )

@@ -1,11 +1,7 @@
-import { ScrollView, StyleSheet, Text } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import TodoItem from '../TodoItem/TodoItem'
 
-type Todo = {
-  id: number
-  content: string
-  completed: boolean
-}
+import { Todo } from '../../shared/types'
 
 type TodoListProps = {
   todos: Todo[]
