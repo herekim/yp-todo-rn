@@ -12,7 +12,7 @@ import AddButton from '../Button/AddButton/AddButton'
 type VTodlModal = {
   isOpen: boolean
   onDismiss: () => void
-  behavior: 'padding' | 'height' | 'position' | undefined
+  behavior: 'padding' | 'height'
   addOrEditTodo: () => void
   inputValue: string
   todoContent?: string

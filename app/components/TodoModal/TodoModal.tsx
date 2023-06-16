@@ -41,8 +41,7 @@ const TodoModal = () => {
     }
   }
 
-  const behavior =
-    Platform.OS === 'ios' ? 'padding' : ('height' as 'padding' | 'height')
+  const behavior: Behavior = Platform.OS === 'ios' ? 'padding' : 'height'
 
   const props = {
     isOpen: todoModal.isOpen,
@@ -56,3 +55,5 @@ const TodoModal = () => {
 }
 
 export default TodoModal
+
+type Behavior = 'padding' | 'height'
