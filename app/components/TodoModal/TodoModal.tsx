@@ -4,20 +4,33 @@ import { Keyboard, Platform } from 'react-native'
 import VTodoModal from './VTodoModal'
 
 import { useDispatch } from 'react-redux'
-import { addTodoStart } from '../../store/slices/todoSlice'
+import { addTodoStart, updateTodoStart } from '../../store/slices/todoSlice'
 
-const TodoModal = ({ isOpen, toggleModal }) => {
-  const [input, setInput] = useState('')
+import { Todo } from '../../shared/types'
+
+interface TodoModalProps {
+  isOpen: boolean
+  toggleModal: () => void
+  todoItem?: Todo
+}
+
+const TodoModal = ({ isOpen, toggleModal, todoItem }: TodoModalProps) => {
+  const [input, setInput] = useState(todoItem ? todoItem?.content : '')
   const dispatch = useDispatch()
 
   const onDismiss = () => {
+    setInput('')
     toggleModal()
     Keyboard.dismiss()
   }
 
-  const addTodo = () => {
+  const addOrEditTodo = () => {
     if (input.length > 0) {
-      dispatch(addTodoStart(input))
+      if (todoItem) {
+        dispatch(updateTodoStart({ ...todoItem, content: input }))
+      } else {
+        dispatch(addTodoStart(input))
+      }
       setInput('')
       onDismiss()
     }
@@ -29,7 +42,7 @@ const TodoModal = ({ isOpen, toggleModal }) => {
   const props = {
     isOpen,
     onDismiss,
-    addTodo,
+    addOrEditTodo,
     behavior,
     inputValue: input,
     setInputValue: (newValue: string) => setInput(newValue),

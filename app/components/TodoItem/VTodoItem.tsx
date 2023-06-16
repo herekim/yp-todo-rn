@@ -1,8 +1,16 @@
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
+import {
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  StyleSheet,
+} from 'react-native'
+
+import Checkbox from 'expo-checkbox'
+
 import TodoModal from '../TodoModal/TodoModal'
 import OptionModal from '../Modal/OptionModal'
-import Checkbox from 'expo-checkbox'
-import { Entypo } from '@expo/vector-icons'
+import DetailButton from '../Button/DetailButton'
 
 import { Todo } from '../../shared/types'
 
@@ -28,20 +36,15 @@ const VTodoItem = ({
   onDelete,
 }: VTodoItemProps) => {
   return (
-    <TouchableOpacity onPress={toggleEditingModal}>
+    <>
       <View style={styles.item}>
-        <View style={styles.row}>
+        <TouchableOpacity style={styles.row} onPress={toggleEditingModal}>
           <Checkbox style={styles.checkbox} />
           <Text style={todo.completed ? styles.completed : styles.content}>
             {todo.content}
           </Text>
-        </View>
-        <TouchableOpacity
-          style={{ height: '100%' }}
-          onPress={onDetailIconPress}
-        >
-          <Entypo name="dots-three-horizontal" size={20} color="lightgray" />
         </TouchableOpacity>
+        <DetailButton onPress={onDetailIconPress} />
       </View>
       <OptionModal
         isOpen={isOptionModalOpen}
@@ -50,8 +53,12 @@ const VTodoItem = ({
         onDelete={onDelete}
         todoId={todo.id}
       />
-      <TodoModal isOpen={isEditingModalOpen} toggleModal={toggleEditingModal} />
-    </TouchableOpacity>
+      <TodoModal
+        isOpen={isEditingModalOpen}
+        toggleModal={toggleEditingModal}
+        todoItem={todo}
+      />
+    </>
   )
 }
 

@@ -13,8 +13,9 @@ type VTodlModal = {
   isOpen: boolean
   onDismiss: () => void
   behavior: 'padding' | 'height' | 'position' | undefined
-  addTodo: () => void
+  addOrEditTodo: () => void
   inputValue: string
+  todoContent?: string
   setInputValue: (newValue: string) => void
 }
 
@@ -22,7 +23,7 @@ const VTodoModal = ({
   isOpen,
   onDismiss,
   behavior,
-  addTodo,
+  addOrEditTodo,
   inputValue,
   setInputValue,
 }: VTodlModal) => {
@@ -42,7 +43,7 @@ const VTodoModal = ({
               style={styles.addButton}
               size={40}
               color="#3d67fc"
-              onPress={addTodo}
+              onPress={addOrEditTodo}
             />
           </View>
         </KeyboardAvoidingView>
