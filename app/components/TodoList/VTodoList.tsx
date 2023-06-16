@@ -1,21 +1,25 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
+
 import TodoItem from '../TodoItem/TodoItem'
 
 import { Todo } from '../../shared/types'
 
 type TodoListProps = {
   todos: Todo[]
+  loadMoreTodos: () => void
 }
 
-const VTodoList = ({ todos }: TodoListProps) => {
+const VTodoList = ({ todos, loadMoreTodos }: TodoListProps) => {
   return (
-    <ScrollView style={styles.list}>
-      <View style={{ paddingBottom: 60 }}>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))}
-      </View>
-    </ScrollView>
+    <FlatList
+      data={todos}
+      renderItem={({ item }) => <TodoItem key={item.id} todo={item} />}
+      keyExtractor={(item) => item.id.toString()}
+      style={styles.list}
+      contentContainerStyle={{ paddingBottom: 60 }}
+      onEndReached={loadMoreTodos}
+      onEndReachedThreshold={0.1}
+    />
   )
 }
 
