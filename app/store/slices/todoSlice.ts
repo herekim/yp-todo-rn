@@ -50,7 +50,6 @@ const todoSlice = createSlice({
       action: PayloadAction<{
         id: number
         content: string
-        completed?: boolean
       }>,
     ) => {
       state.loading = true

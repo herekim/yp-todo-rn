@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import {
   Text,
   View,
@@ -7,10 +6,12 @@ import {
   TextInput,
   StyleSheet,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+
 import { RootState } from '../store'
 import { updateTodoStart } from '../store/slices/todoSlice'
 
@@ -18,9 +19,14 @@ import { useCompleted, useNote } from '../shared/hooks'
 
 import Checkbox from 'expo-checkbox'
 
+import { NavigationProps } from '../shared/types'
+
 const DetailScreen = ({ route }) => {
   const { todoId } = route.params
+
   const dispatch = useDispatch()
+  const navigation = useNavigation<NavigationProps>()
+
   const { completed, toggleCheckbox } = useCompleted(todoId)
   const { note, updateNote } = useNote(todoId)
 
@@ -29,9 +35,14 @@ const DetailScreen = ({ route }) => {
 
   const [value, setValue] = useState(todo.content)
 
+  const onUpdateButtonPress = () => {
+    dispatch(updateTodoStart({ id: todo.id, content: value }))
+    navigation.navigate('Home')
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView style={{ width: '100%' }}>
+      <ScrollView>
         <View style={styles.section}>
           <Text style={styles.title}>할 일</Text>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -58,15 +69,42 @@ const DetailScreen = ({ route }) => {
           </TouchableWithoutFeedback>
         </View>
         <View style={styles.section}>
-          <Text style={styles.title}>완료 여부</Text>
-          <Checkbox
-            value={completed}
-            style={styles.checkbox}
-            onValueChange={() => toggleCheckbox(todo.id)}
-            color="#3d67fc"
-          />
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+            <Text style={{ fontSize: 28, fontWeight: 'bold' }}>완료 여부</Text>
+            <Checkbox
+              value={completed}
+              style={styles.checkbox}
+              onValueChange={() => toggleCheckbox(todo.id)}
+              color="#3d67fc"
+            />
+          </View>
         </View>
       </ScrollView>
+      <View
+        style={{
+          justifyContent: 'flex-end',
+          paddingBottom: 20,
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+        }}
+      >
+        <TouchableOpacity
+          style={{ backgroundColor: '#3d67fc', borderRadius: 20 }}
+          onPress={onUpdateButtonPress}
+        >
+          <Text
+            style={{
+              padding: 20,
+              color: 'white',
+              fontSize: 18,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}
+          >
+            완료
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -77,8 +115,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
     padding: 20,
     paddingTop: 40,
   },

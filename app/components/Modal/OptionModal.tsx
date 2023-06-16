@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { GestureResponderEvent } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import VOptionModal from './VOptionModal'
 import { openModal, closeModal } from '../../store/slices/modalSlice'
@@ -11,18 +10,13 @@ import { RootState } from '../../store'
 
 import { deleteTodoStart } from '../../store/slices/todoSlice'
 
-type RootStackParamList = {
-  Home: undefined
-  Detail: { todoId: number }
-}
-
-type Props = NativeStackNavigationProp<RootStackParamList, 'Detail'>
+import { NavigationProps } from '../../shared/types'
 
 const OptionModal = () => {
   const { optionModal } = useSelector((state: RootState) => state.modal)
   const dispatch = useDispatch()
 
-  const navigation = useNavigation<Props>()
+  const navigation = useNavigation<NavigationProps>()
 
   const onDeletePress = (id: number) => {
     dispatch(closeModal('optionModal'))

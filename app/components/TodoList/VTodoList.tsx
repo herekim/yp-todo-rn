@@ -1,10 +1,4 @@
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  FlatList,
-  RefreshControl,
-} from 'react-native'
+import { FlatList, RefreshControl } from 'react-native'
 import TodoItem from '../TodoItem/TodoItem'
 
 import { Todo } from '../../shared/types'

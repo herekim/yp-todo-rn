@@ -25,7 +25,7 @@ const TodoList = ({ todos }: TodoListProps) => {
   }
 
   const props = {
-    todos: displayedTodos,
+    todos,
     loadMoreTodos,
     refreshing,
     onRefresh,

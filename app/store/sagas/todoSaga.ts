@@ -39,7 +39,7 @@ function* addTodoSaga(action: PayloadAction<string>) {
 }
 
 function* updateTodoSaga(
-  action: PayloadAction<{ id: number; content: string; completed?: boolean }>,
+  action: PayloadAction<{ id: number; content: string }>,
 ) {
   try {
     const updatedTodo = yield call(updateTodo, action.payload)
