@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import TodoItem from '../TodoItem/TodoItem'
 
 import { Todo } from '../../shared/types'
@@ -10,9 +10,11 @@ type TodoListProps = {
 const VTodoList = ({ todos }: TodoListProps) => {
   return (
     <ScrollView style={styles.list}>
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+      <View style={{ paddingBottom: 60 }}>
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
+      </View>
     </ScrollView>
   )
 }

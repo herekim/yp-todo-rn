@@ -16,9 +16,12 @@ import {
   deleteTodoFailure,
 } from '../slices/todoSlice'
 
+import { Todo } from '../../shared/types'
+
 function* fetchTodos() {
   try {
-    const todos = yield call(getTodos)
+    let todos: Todo[] = yield call(getTodos)
+    todos = todos.map((todo) => ({ ...todo, completed: false }))
     yield put(getTodosSuccess(todos))
   } catch (e) {
     yield put(getTodosFailure(e.toString()))
@@ -35,7 +38,7 @@ function* addTodoSaga(action: PayloadAction<string>) {
 }
 
 function* updateTodoSaga(
-  action: PayloadAction<{ id: number; content: string }>,
+  action: PayloadAction<{ id: number; content: string; completed?: boolean }>,
 ) {
   try {
     const updatedTodo = yield call(updateTodo, action.payload)

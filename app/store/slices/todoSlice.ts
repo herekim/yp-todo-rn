@@ -41,7 +41,14 @@ const todoSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-    updateTodoStart: (state, action: PayloadAction<Todo>) => {
+    updateTodoStart: (
+      state,
+      action: PayloadAction<{
+        id: number
+        content: string
+        completed?: boolean
+      }>,
+    ) => {
       state.loading = true
       state.error = null
     },

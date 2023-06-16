@@ -9,29 +9,35 @@ import { Todo } from '../../shared/types'
 interface VTodoItemProps {
   todo: Todo
   toggleEditingModal: (type: 'open' | 'close') => void
+  toggleCheckbox: (id: number) => void
   onDetailIconPress: (event: any) => void
+  completed: boolean
 }
 
 const VTodoItem = ({
   todo,
   toggleEditingModal,
+  toggleCheckbox,
   onDetailIconPress,
+  completed,
 }: VTodoItemProps) => {
   return (
-    <>
-      <View style={styles.item}>
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => toggleEditingModal('open')}
-        >
-          <Checkbox style={styles.checkbox} />
-          <Text style={todo.completed ? styles.completed : styles.content}>
+    <View style={styles.item}>
+      <TouchableOpacity style={styles.row}>
+        <Checkbox
+          value={completed}
+          style={styles.checkbox}
+          onValueChange={() => toggleCheckbox(todo.id)}
+          color="#3d67fc"
+        />
+        <TouchableOpacity onPress={() => toggleEditingModal('open')}>
+          <Text style={completed ? styles.completed : styles.content}>
             {todo.content}
           </Text>
         </TouchableOpacity>
-        <DetailButton onPress={onDetailIconPress} />
-      </View>
-    </>
+      </TouchableOpacity>
+      <DetailButton onPress={onDetailIconPress} />
+    </View>
   )
 }
 
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     marginRight: 20,
-    borderColor: 'black',
+    borderRadius: 100,
   },
   content: {
     fontSize: 16,
@@ -64,7 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textDecorationLine: 'line-through',
     color: '#aaa',
-    flexShrink: 1,
   },
 })
 

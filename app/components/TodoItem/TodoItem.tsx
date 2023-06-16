@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { deleteTodoStart } from '../../store/slices/todoSlice'
 import { openModal, closeModal } from '../../store/slices/modalSlice'
 
+import { useCompleted } from '../../shared/hooks'
+
 import { Todo } from '../../shared/types'
 
 interface TodoItemProps {
@@ -14,8 +16,11 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const dispatch = useDispatch()
+  const { completed, toggleCheckbox } = useCompleted(todo.id)
 
   const toggleEditingModal = (type: 'open' | 'close') => {
+    if (completed) return
+
     if (type === 'open') {
       dispatch(openModal({ modalType: 'todoModal', payload: todo }))
     } else {
@@ -54,8 +59,10 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const props = {
     todo,
     toggleEditingModal,
+    toggleCheckbox,
     onDetailIconPress,
     onDelete,
+    completed,
   }
 
   return <VTodoItem {...props} />
