@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { deleteTodoStart } from '../../store/slices/todoSlice'
 import { openModal, closeModal } from '../../store/slices/modalSlice'
 
-import { useCompleted } from '../../shared/hooks'
+import { useCompleted } from '../../domains/hooks'
 
 import { Todo } from '../../shared/types'
 

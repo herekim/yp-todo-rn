@@ -1,6 +1,11 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { getTodos, addTodo, updateTodo, deleteTodo } from '../../services/todo'
+import {
+  getTodos,
+  addTodo,
+  updateTodo,
+  deleteTodo,
+} from '../../domains/api/todo'
 import {
   getTodosStart,
   getTodosSuccess,

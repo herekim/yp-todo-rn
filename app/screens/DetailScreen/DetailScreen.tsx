@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import { RootState } from '../../store'
 import { updateTodoStart } from '../../store/slices/todoSlice'
 
-import { useCompleted, useNote } from '../../shared/hooks'
+import { useCompleted, useNote } from '../../domains/hooks'
 
 import { NavigationProps } from '../../shared/types'
 

@@ -1,5 +1,5 @@
-import axiosClient from '../api/axios'
-import { API } from '../api/api'
+import axiosClient from './axios'
+import { API } from './api'
 
 export const getTodos = async () => {
   try {
