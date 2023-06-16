@@ -13,7 +13,8 @@ interface VOptionModalProps {
   isOpen: boolean
   toggleModal: (type: 'open' | 'close') => void
   position: { x: number; y: number }
-  onDelete: (id: number) => void
+  onDeletePress: (id: number) => void
+  onDetailPress: (id: number) => void
   todoId: number
 }
 
@@ -21,7 +22,8 @@ const VOptionModal = ({
   isOpen,
   toggleModal,
   position,
-  onDelete,
+  onDeletePress,
+  onDetailPress,
   todoId,
 }: VOptionModalProps) => {
   return (
@@ -35,13 +37,9 @@ const VOptionModal = ({
                 { top: position?.y - 20, left: position?.x - 80 },
               ]}
             >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                  gap: 10,
-                }}
+              <TouchableOpacity
+                onPress={() => onDetailPress(todoId)}
+                style={styles.button}
               >
                 <Ionicons
                   name="document-text-outline"
@@ -49,15 +47,10 @@ const VOptionModal = ({
                   color="black"
                 />
                 <Text>자세히</Text>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => onDelete(todoId)}
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                  gap: 10,
-                }}
+                onPress={() => onDeletePress(todoId)}
+                style={styles.button}
               >
                 <MaterialIcons
                   name="delete-outline"
@@ -96,6 +89,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  button: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: 10,
   },
 })
 

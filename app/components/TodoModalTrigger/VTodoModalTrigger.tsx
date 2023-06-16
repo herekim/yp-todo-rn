@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native'
 
-import AddButton from '../Button/AddButton'
+import AddButton from '../Button/AddButton/AddButton'
 
 interface TodoModalTriggerProps {
   toggleModal: (type: 'open' | 'close') => void

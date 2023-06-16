@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native'
 
-import AddButton from '../Button/AddButton'
+import AddButton from '../Button/AddButton/AddButton'
 
 type VTodlModal = {
   isOpen: boolean

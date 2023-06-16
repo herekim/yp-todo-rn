@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 
 import Checkbox from 'expo-checkbox'
 
-import DetailButton from '../Button/DetailButton'
+import DetailButton from '../Button/DetailButton/DetailButton'
 
 import { Todo } from '../../shared/types'
 
