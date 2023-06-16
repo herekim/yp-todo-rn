@@ -1,44 +1,29 @@
-import {
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  StyleSheet,
-} from 'react-native'
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 
 import Checkbox from 'expo-checkbox'
 
-import TodoModal from '../TodoModal/TodoModal'
-import OptionModal from '../Modal/OptionModal'
 import DetailButton from '../Button/DetailButton'
 
 import { Todo } from '../../shared/types'
 
 interface VTodoItemProps {
   todo: Todo
-  isEditingModalOpen: boolean
-  isOptionModalOpen: boolean
-  toggleEditingModal: () => void
-  toggleOptionModal: () => void
-  modalPosition: { x: number; y: number }
+  toggleEditingModal: (type: 'open' | 'close') => void
   onDetailIconPress: (event: any) => void
-  onDelete: (id: number) => void
 }
 
 const VTodoItem = ({
   todo,
-  isEditingModalOpen,
-  isOptionModalOpen,
   toggleEditingModal,
-  toggleOptionModal,
-  modalPosition,
   onDetailIconPress,
-  onDelete,
 }: VTodoItemProps) => {
   return (
     <>
       <View style={styles.item}>
-        <TouchableOpacity style={styles.row} onPress={toggleEditingModal}>
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => toggleEditingModal('open')}
+        >
           <Checkbox style={styles.checkbox} />
           <Text style={todo.completed ? styles.completed : styles.content}>
             {todo.content}
@@ -46,18 +31,6 @@ const VTodoItem = ({
         </TouchableOpacity>
         <DetailButton onPress={onDetailIconPress} />
       </View>
-      <OptionModal
-        isOpen={isOptionModalOpen}
-        toggleModal={toggleOptionModal}
-        position={modalPosition}
-        onDelete={onDelete}
-        todoId={todo.id}
-      />
-      <TodoModal
-        isOpen={isEditingModalOpen}
-        toggleModal={toggleEditingModal}
-        todoItem={todo}
-      />
     </>
   )
 }

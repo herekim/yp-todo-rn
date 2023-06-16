@@ -1,23 +1,20 @@
 import { View, StyleSheet } from 'react-native'
 
-import TodoModal from '../TodoModal/TodoModal'
 import AddButton from '../Button/AddButton'
 
 interface TodoModalTriggerProps {
-  isOpen: boolean
-  toggleModal: () => void
+  toggleModal: (type: 'open' | 'close') => void
 }
 
-const VTodoModalTrigger = ({ isOpen, toggleModal }: TodoModalTriggerProps) => {
+const VTodoModalTrigger = ({ toggleModal }: TodoModalTriggerProps) => {
   return (
     <View style={styles.container}>
       <AddButton
         style={styles.addButton}
-        onPress={toggleModal}
+        onPress={() => toggleModal('open')}
         size={40}
         color="#3d67fc"
       />
-      <TodoModal isOpen={isOpen} toggleModal={toggleModal} />
     </View>
   )
 }

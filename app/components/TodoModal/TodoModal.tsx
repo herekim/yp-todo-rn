@@ -1,33 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Keyboard, Platform } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 
 import VTodoModal from './VTodoModal'
 
-import { useDispatch } from 'react-redux'
 import { addTodoStart, updateTodoStart } from '../../store/slices/todoSlice'
+import { closeModal } from '../../store/slices/modalSlice'
 
-import { Todo } from '../../shared/types'
+import { RootState } from '../../store'
 
-interface TodoModalProps {
-  isOpen: boolean
-  toggleModal: () => void
-  todoItem?: Todo
-}
+const TodoModal = () => {
+  const { todoModal } = useSelector((state: RootState) => state.modal)
 
-const TodoModal = ({ isOpen, toggleModal, todoItem }: TodoModalProps) => {
-  const [input, setInput] = useState(todoItem ? todoItem?.content : '')
+  const [input, setInput] = useState(
+    todoModal.todoItem ? todoModal?.todoItem.content : '',
+  )
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (todoModal.todoItem) {
+      setInput(todoModal.todoItem.content)
+    }
+  }, [todoModal.todoItem])
 
   const onDismiss = () => {
     setInput('')
-    toggleModal()
+    dispatch(closeModal('todoModal'))
     Keyboard.dismiss()
   }
 
   const addOrEditTodo = () => {
     if (input.length > 0) {
-      if (todoItem) {
-        dispatch(updateTodoStart({ ...todoItem, content: input }))
+      if (todoModal.todoItem) {
+        dispatch(updateTodoStart({ ...todoModal.todoItem, content: input }))
       } else {
         dispatch(addTodoStart(input))
       }
@@ -40,7 +45,7 @@ const TodoModal = ({ isOpen, toggleModal, todoItem }: TodoModalProps) => {
     Platform.OS === 'ios' ? 'padding' : ('height' as 'padding' | 'height')
 
   const props = {
-    isOpen,
+    isOpen: todoModal.isOpen,
     onDismiss,
     addOrEditTodo,
     behavior,

@@ -1,12 +1,21 @@
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import VTodoModalTrigger from './VTodoModalTrigger'
 
+import { openModal, closeModal } from '../../store/slices/modalSlice'
+
 const TodoModalTrigger = () => {
-  const [modalVisible, setModalVisible] = useState(false)
+  const dispatch = useDispatch()
+
+  const toggleModal = (type: 'open' | 'close') => {
+    if (type === 'open') {
+      dispatch(openModal({ modalType: 'todoModal' }))
+    } else {
+      dispatch(closeModal('todoModal'))
+    }
+  }
 
   const props = {
-    isOpen: modalVisible,
-    toggleModal: () => setModalVisible((prev) => !prev),
+    toggleModal,
   }
 
   return <VTodoModalTrigger {...props} />

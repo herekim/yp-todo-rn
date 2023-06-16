@@ -8,7 +8,14 @@ import {
 } from 'react-native'
 
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
-import { OptionModalProps } from './OptionModal'
+
+interface VOptionModalProps {
+  isOpen: boolean
+  toggleModal: (type: 'open' | 'close') => void
+  position: { x: number; y: number }
+  onDelete: (id: number) => void
+  todoId: number
+}
 
 const VOptionModal = ({
   isOpen,
@@ -16,16 +23,16 @@ const VOptionModal = ({
   position,
   onDelete,
   todoId,
-}: OptionModalProps) => {
+}: VOptionModalProps) => {
   return (
     <Modal transparent={true} visible={isOpen}>
-      <TouchableWithoutFeedback onPress={toggleModal}>
+      <TouchableWithoutFeedback onPress={() => toggleModal('close')}>
         <View style={styles.modalBackground}>
           <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
             <View
               style={[
                 styles.modalView,
-                { top: position.y - 20, left: position.x - 80 },
+                { top: position?.y - 20, left: position?.x - 80 },
               ]}
             >
               <View

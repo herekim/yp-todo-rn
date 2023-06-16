@@ -5,6 +5,8 @@ import { StyleSheet, View, Text } from 'react-native'
 
 import TodoModalTrigger from '../components/TodoModalTrigger/TodoModalTrigger'
 import TodoList from '../components/TodoList/TodoList'
+import TodoModal from '../components/TodoModal/TodoModal'
+import OptionModal from '../components/Modal/OptionModal'
 
 import { getTodosStart } from '../store/slices/todoSlice'
 
@@ -28,6 +30,8 @@ const HomeScreen = () => {
         <Text>할 일이 없어요!</Text>
       )}
       <TodoModalTrigger />
+      <TodoModal />
+      <OptionModal />
     </View>
   )
 }
