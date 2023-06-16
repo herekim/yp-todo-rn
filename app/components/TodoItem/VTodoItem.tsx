@@ -1,34 +1,34 @@
-import React, { useState } from 'react'
-import {
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  Modal,
-  StyleSheet,
-} from 'react-native'
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
+import TodoModal from '../TodoModal/TodoModal'
+import OptionModal from '../Modal/OptionModal'
 import Checkbox from 'expo-checkbox'
-import { Entypo, MaterialIcons, Ionicons } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 
 import { Todo } from '../../shared/types'
 
-type TodoItemProps = {
+interface VTodoItemProps {
   todo: Todo
-  onPress: (id: number) => void
+  isEditingModalOpen: boolean
+  isOptionModalOpen: boolean
+  toggleEditingModal: () => void
+  toggleOptionModal: () => void
+  modalPosition: { x: number; y: number }
+  onDetailIconPress: (event: any) => void
   onDelete: (id: number) => void
 }
 
-const VTodoItem = ({ todo, onPress, onDelete }: TodoItemProps) => {
-  const [modalVisible, setModalVisible] = useState(false)
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
-
-  const handlePress = (event) => {
-    setModalVisible(!modalVisible)
-    setModalPosition({ x: event.nativeEvent.pageX, y: event.nativeEvent.pageY })
-  }
-
+const VTodoItem = ({
+  todo,
+  isEditingModalOpen,
+  isOptionModalOpen,
+  toggleEditingModal,
+  toggleOptionModal,
+  modalPosition,
+  onDetailIconPress,
+  onDelete,
+}: VTodoItemProps) => {
   return (
-    <TouchableOpacity onPress={() => onPress(todo.id)} style={{ flex: 1 }}>
+    <TouchableOpacity onPress={toggleEditingModal}>
       <View style={styles.item}>
         <View style={styles.row}>
           <Checkbox style={styles.checkbox} />
@@ -36,58 +36,21 @@ const VTodoItem = ({ todo, onPress, onDelete }: TodoItemProps) => {
             {todo.content}
           </Text>
         </View>
-        <TouchableOpacity style={{ height: '100%' }} onPress={handlePress}>
+        <TouchableOpacity
+          style={{ height: '100%' }}
+          onPress={onDetailIconPress}
+        >
           <Entypo name="dots-three-horizontal" size={20} color="lightgray" />
         </TouchableOpacity>
       </View>
-      <Modal transparent={true} visible={modalVisible}>
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modalBackground}>
-            <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-              <View
-                style={[
-                  styles.modalView,
-                  { top: modalPosition.y - 20, left: modalPosition.x - 80 },
-                ]}
-              >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <Ionicons
-                    name="document-text-outline"
-                    size={20}
-                    color="black"
-                  />
-                  <Text style={styles.modalText}>자세히</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() => onDelete(todo.id)}
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <MaterialIcons
-                    name="delete-outline"
-                    color="#FF5532"
-                    size={20}
-                  />
-                  <Text style={[styles.modalText, { color: '#FF5532' }]}>
-                    삭제
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+      <OptionModal
+        isOpen={isOptionModalOpen}
+        toggleModal={toggleOptionModal}
+        position={modalPosition}
+        onDelete={onDelete}
+        todoId={todo.id}
+      />
+      <TodoModal isOpen={isEditingModalOpen} toggleModal={toggleEditingModal} />
     </TouchableOpacity>
   )
 }
@@ -122,32 +85,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     color: '#aaa',
     flexShrink: 1,
-  },
-  modalBackground: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalView: {
-    flexDirection: 'column',
-    gap: 20,
-    position: 'absolute',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
-    // marginBottom: 15,
-    textAlign: 'center',
   },
 })
 
