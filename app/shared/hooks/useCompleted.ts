@@ -1,37 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { setCompleted } from '../../store/slices/todoSlice'
 
-const useCompleted = (id: number) => {
-  const [completed, setCompleted] = useState(false)
-  const [trigger, setTrigger] = useState(0)
+import { RootState } from '../../store'
+
+const useCompletedRedux = (id: number) => {
+  const completed = useSelector(
+    (state: RootState) => state.todo.completed[id] || false,
+  )
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const loadCompletionStatus = async () => {
       const storedStatus = await AsyncStorage.getItem(`todo:${id}:completed`)
-      setCompleted(storedStatus === 'true')
-
-      const storedTrigger = await AsyncStorage.getItem(`todo:${id}:trigger`)
-      setTrigger(storedTrigger ? Number(storedTrigger) : 0)
+      dispatch(setCompleted({ id, completed: storedStatus === 'true' }))
     }
 
     loadCompletionStatus()
-  }, [id, trigger])
+  }, [id, dispatch])
 
   const toggleCheckbox = async (id: number) => {
     const newCompletedStatus = !completed
-    setCompleted(newCompletedStatus)
+    dispatch(setCompleted({ id, completed: newCompletedStatus }))
 
     await AsyncStorage.setItem(
       `todo:${id}:completed`,
       String(newCompletedStatus),
     )
-
-    const newTrigger = trigger + 1
-    setTrigger(newTrigger)
-    await AsyncStorage.setItem(`todo:${id}:trigger`, String(newTrigger))
   }
 
   return { completed, toggleCheckbox }
 }
 
-export default useCompleted
+export default useCompletedRedux

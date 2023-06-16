@@ -28,18 +28,12 @@ const VTodoList = ({
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => <TodoItem todo={item} />}
       onEndReached={loadMoreTodos}
-      onEndReachedThreshold={0.5}
+      onEndReachedThreshold={0.1}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     />
   )
 }
-
-const styles = StyleSheet.create({
-  list: {
-    width: '100%',
-  },
-})
 
 export default VTodoList
