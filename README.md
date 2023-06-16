@@ -31,7 +31,7 @@ https://github.com/herekim/yp-todo-rn/assets/76519867/400d1854-808c-4b0d-a57b-0d
 
 # 아키텍처에 구현 방법
 ## 주요 폴더 구조
-![스크린샷 2023-06-17 03 58 29](https://github.com/herekim/yp-todo-rn/assets/76519867/68c22e82-c26d-4fcb-8d69-7f51151b1e76)
+<img width="612" alt="스크린샷 2023-06-17 05 17 19" src="https://github.com/herekim/yp-todo-rn/assets/76519867/8fa6591b-9e91-4730-b9a4-b4f005d57302">
 
 ## VAC 패턴의 적용
 - 컴포넌트 폴더에 대해서 Component.tsx, VConponent.tsx로 비즈니스 로직 컴포넌트와 뷰 컴포넌트를 분리했습니다.
