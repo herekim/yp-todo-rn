@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(getTodosStart())
-  }, [])
+  }, [dispatch])
 
   return (
     <View style={styles.container}>

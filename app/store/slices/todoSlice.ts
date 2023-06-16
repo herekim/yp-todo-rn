@@ -3,6 +3,8 @@ import { Todo } from '../../shared/types'
 
 type TodoState = {
   todos: Todo[]
+  displayedTodos: Todo[]
+  displayedCount: number
   loading: boolean
   error: string | null
   completed: { [key: number]: number }
@@ -11,6 +13,8 @@ type TodoState = {
 
 const initialState: TodoState = {
   todos: [],
+  displayedTodos: [],
+  displayedCount: 10,
   loading: false,
   error: null,
   completed: {},
@@ -89,6 +93,15 @@ const todoSlice = createSlice({
     setNote: (state, action: PayloadAction<string>) => {
       state.note = action.payload
     },
+    setDisplayedTodos: (state, action: PayloadAction<Todo[]>) => {
+      state.displayedTodos = action.payload
+    },
+    increaseDisplayedCount: (state) => {
+      state.displayedCount += 10
+    },
+    resetDisplayedCount: (state) => {
+      state.displayedCount = 10
+    },
   },
 })
 
@@ -107,6 +120,9 @@ export const {
   deleteTodoFailure,
   setCompleted,
   setNote,
+  setDisplayedTodos,
+  increaseDisplayedCount,
+  resetDisplayedCount,
 } = todoSlice.actions
 
 export default todoSlice.reducer
