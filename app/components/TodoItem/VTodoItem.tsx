@@ -30,8 +30,14 @@ const VTodoItem = ({
           onValueChange={() => toggleCheckbox(todo.id)}
           color="#3d67fc"
         />
-        <TouchableOpacity onPress={() => toggleEditingModal('open')}>
-          <Text style={completed ? styles.completed : styles.content}>
+        <TouchableOpacity
+          style={{ flex: 1 }}
+          onPress={() => toggleEditingModal('open')}
+        >
+          <Text
+            style={completed ? styles.completed : styles.content}
+            numberOfLines={5}
+          >
             {todo.content}
           </Text>
         </TouchableOpacity>
@@ -47,7 +53,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
-    height: 60,
     backgroundColor: '#F5F5F5',
     borderRadius: 15,
     marginBottom: 10,
@@ -64,7 +69,6 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 16,
     color: '#333',
-    flexShrink: 1,
   },
   completed: {
     fontSize: 16,
