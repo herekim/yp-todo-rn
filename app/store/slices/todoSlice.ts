@@ -6,6 +6,7 @@ type TodoState = {
   loading: boolean
   error: string | null
   completed: { [key: number]: number }
+  note: string
 }
 
 const initialState: TodoState = {
@@ -13,6 +14,7 @@ const initialState: TodoState = {
   loading: false,
   error: null,
   completed: {},
+  note: '',
 }
 
 const todoSlice = createSlice({
@@ -85,6 +87,9 @@ const todoSlice = createSlice({
     setCompleted: (state, action) => {
       state.completed[action.payload.id] = action.payload.completed
     },
+    setNote: (state, action: PayloadAction<string>) => {
+      state.note = action.payload
+    },
   },
 })
 
@@ -102,6 +107,7 @@ export const {
   deleteTodoSuccess,
   deleteTodoFailure,
   setCompleted,
+  setNote,
 } = todoSlice.actions
 
 export default todoSlice.reducer

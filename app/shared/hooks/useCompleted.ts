@@ -5,9 +5,9 @@ import { setCompleted } from '../../store/slices/todoSlice'
 
 import { RootState } from '../../store'
 
-const useCompletedRedux = (id: number) => {
-  const completed = useSelector(
-    (state: RootState) => state.todo.completed[id] || false,
+const useCompleted = (id: number) => {
+  const completed = useSelector((state: RootState) =>
+    Boolean(state.todo.completed[id]),
   )
   const dispatch = useDispatch()
 
@@ -33,4 +33,4 @@ const useCompletedRedux = (id: number) => {
   return { completed, toggleCheckbox }
 }
 
-export default useCompletedRedux
+export default useCompleted

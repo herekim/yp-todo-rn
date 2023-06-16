@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store'
 import { updateTodoStart } from '../store/slices/todoSlice'
 
-import { useCompleted } from '../shared/hooks'
+import { useCompleted, useNote } from '../shared/hooks'
 
 import Checkbox from 'expo-checkbox'
 
@@ -22,12 +22,12 @@ const DetailScreen = ({ route }) => {
   const { todoId } = route.params
   const dispatch = useDispatch()
   const { completed, toggleCheckbox } = useCompleted(todoId)
+  const { note, updateNote } = useNote(todoId)
 
   const todos = useSelector((state: RootState) => state.todo.todos)
   const todo = todos.find((todo) => todo.id === todoId)
 
   const [value, setValue] = useState(todo.content)
-  const [note, setNote] = useState('')
 
   return (
     <View style={styles.container}>
@@ -51,7 +51,7 @@ const DetailScreen = ({ route }) => {
             <TextInput
               style={styles.content}
               value={note}
-              onChangeText={setNote}
+              onChangeText={(text) => updateNote(todo.id, text)}
               placeholder="노트를 입력하세요."
               multiline
             />
