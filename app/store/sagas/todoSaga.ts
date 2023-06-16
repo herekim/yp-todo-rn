@@ -5,7 +5,7 @@ import {
   addTodo,
   updateTodo,
   deleteTodo,
-} from '../../domains/api/todo'
+} from '../../services/api/todo'
 import {
   getTodosStart,
   getTodosSuccess,
