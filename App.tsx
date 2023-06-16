@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Provider } from 'react-redux'
 import store from './app/store'
 
-import HomeScreen from './app/screens/HomeScreen'
-import DetailScreen from './app/screens/DetailScreen'
+import HomeScreen from './app/screens/Homescreen/HomeScreen'
+import DetailScreen from './app/screens/DetailScreen/DetailScreen'
 
 type RootStackParamList = {
   Home: undefined

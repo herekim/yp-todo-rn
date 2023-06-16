@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Text,
   View,
@@ -9,37 +8,32 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'
-
-import { RootState } from '../store'
-import { updateTodoStart } from '../store/slices/todoSlice'
-
-import { useCompleted, useNote } from '../shared/hooks'
 
 import Checkbox from 'expo-checkbox'
 
-import { NavigationProps } from '../shared/types'
+import { Todo } from '../../shared/types'
 
-const DetailScreen = ({ route }) => {
-  const { todoId } = route.params
+interface VDetailScreenProps {
+  todo: Todo
+  value: string
+  setValue: (text: string) => void
+  note: string
+  updateNote: (id: number, text: string) => void
+  completed: boolean
+  toggleCheckbox: (id: number) => void
+  onUpdateButtonPress: () => void
+}
 
-  const dispatch = useDispatch()
-  const navigation = useNavigation<NavigationProps>()
-
-  const { completed, toggleCheckbox } = useCompleted(todoId)
-  const { note, updateNote } = useNote(todoId)
-
-  const todos = useSelector((state: RootState) => state.todo.todos)
-  const todo = todos.find((todo) => todo.id === todoId)
-
-  const [value, setValue] = useState(todo.content)
-
-  const onUpdateButtonPress = () => {
-    dispatch(updateTodoStart({ id: todo.id, content: value }))
-    navigation.navigate('Home')
-  }
-
+const VDetailScreen = ({
+  todo,
+  value,
+  setValue,
+  note,
+  updateNote,
+  completed,
+  toggleCheckbox,
+  onUpdateButtonPress,
+}: VDetailScreenProps) => {
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -109,7 +103,7 @@ const DetailScreen = ({ route }) => {
   )
 }
 
-export default DetailScreen
+export default VDetailScreen
 
 const styles = StyleSheet.create({
   container: {
