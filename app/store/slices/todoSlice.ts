@@ -34,7 +34,7 @@ const todoSlice = createSlice({
       state.error = null
     },
     addTodoSuccess: (state, action: PayloadAction<Todo>) => {
-      state.todos.push(action.payload)
+      state.todos.unshift(action.payload)
       state.loading = false
     },
     addTodoFailure: (state, action: PayloadAction<string>) => {
