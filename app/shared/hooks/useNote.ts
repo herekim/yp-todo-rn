@@ -6,20 +6,20 @@ import { setNote } from '../../store/slices/todoSlice'
 import { RootState } from '../../store'
 
 const useNote = (id: number) => {
-  const note = useSelector((state: RootState) => state.todo.note)
+  const note = useSelector((state: RootState) => state.todo.note[id])
   const dispatch = useDispatch()
 
   useEffect(() => {
     const loadNote = async () => {
       const storedNote = await AsyncStorage.getItem(`todo:${id}:note`)
-      dispatch(setNote(storedNote || ''))
+      dispatch(setNote({ id, note: storedNote || '' }))
     }
 
     loadNote()
   }, [id, dispatch])
 
   const updateNote = async (id: number, note: string) => {
-    dispatch(setNote(note))
+    dispatch(setNote({ id, note }))
 
     await AsyncStorage.setItem(`todo:${id}:note`, note)
   }

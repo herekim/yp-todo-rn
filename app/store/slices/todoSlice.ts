@@ -8,7 +8,7 @@ type TodoState = {
   loading: boolean
   error: string | null
   completed: { [key: number]: number }
-  note: string
+  note: { [key: number]: string }
 }
 
 const initialState: TodoState = {
@@ -18,7 +18,7 @@ const initialState: TodoState = {
   loading: false,
   error: null,
   completed: {},
-  note: '',
+  note: {},
 }
 
 const todoSlice = createSlice({
@@ -90,8 +90,8 @@ const todoSlice = createSlice({
     setCompleted: (state, action) => {
       state.completed[action.payload.id] = action.payload.completed
     },
-    setNote: (state, action: PayloadAction<string>) => {
-      state.note = action.payload
+    setNote: (state, action) => {
+      state.note[action.payload.id] = action.payload.note
     },
     setDisplayedTodos: (state, action: PayloadAction<Todo[]>) => {
       state.displayedTodos = action.payload
