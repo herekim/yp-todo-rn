@@ -21,6 +21,7 @@ import { Todo } from '../../shared/types'
 function* fetchTodos() {
   try {
     let todos: Todo[] = yield call(getTodos)
+    todos.reverse()
     todos = todos.map((todo) => ({ ...todo, completed: false }))
     yield put(getTodosSuccess(todos))
   } catch (e) {

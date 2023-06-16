@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, ScrollView } from 'react-native'
 
 import TodoModalTrigger from '../components/TodoModalTrigger/TodoModalTrigger'
 import TodoList from '../components/TodoList/TodoList'
@@ -22,6 +22,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 28, fontWeight: '800', marginBottom: 30 }}>
+        안녕하세요. 좋은 아침.
+      </Text>
       {todos.length > 0 ? (
         <TodoList todos={todos} />
       ) : (
@@ -40,8 +43,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    padding: 30,
   },
 })

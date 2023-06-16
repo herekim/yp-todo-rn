@@ -9,6 +9,13 @@ type TodoListProps = {
 
 const TodoList = ({ todos }: TodoListProps) => {
   const [displayedTodos, setDisplayedTodos] = useState(todos.slice(0, 10))
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    setDisplayedTodos(todos.slice(0, 10))
+    setRefreshing(false)
+  }
 
   const loadMoreTodos = () => {
     let nextTodos = displayedTodos.concat(
@@ -20,6 +27,8 @@ const TodoList = ({ todos }: TodoListProps) => {
   const props = {
     todos: displayedTodos,
     loadMoreTodos,
+    refreshing,
+    onRefresh,
   }
 
   return <VTodoList {...props} />
