@@ -100,7 +100,7 @@ https://github.com/herekim/yp-todo-rn/assets/76519867/400d1854-808c-4b0d-a57b-0d
 - 그래서 무한 스크롤을 위해 10개씩 잘린 todo 데이터를 전역 상태로 관리하도록 수정했습니다.
 
 # 시간이 더 있었다면 진행할 것들
-- Jest를 이용한 Saga 테스트 https://github.com/herekim/yp-todo-rn/issues/10#issue-1762304830
+- Jest를 이용한 Saga 테스트 https://github.com/herekim/yp-todo-rn/issues/10
 - 코드 중복 제거 https://github.com/herekim/yp-todo-rn/issues/11
 - 에러 처리 https://github.com/herekim/yp-todo-rn/issues/12
 - useCompleted, useNote 코드를 Saga로 이전 https://github.com/herekim/yp-todo-rn/issues/9
