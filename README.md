@@ -1,7 +1,7 @@
 # yp-todo-rn
 React Native로 만드는 Todo App
 # 사용 예시
-https://github.com/herekim/yp-todo-rn/assets/76519867/400d1854-808c-4b0d-a57b-0d20f8c22bf9
+https://github.com/herekim/yp-todo-rn/assets/76519867/ef19288a-58a4-4872-84fb-27ccb7b109db
 # 앱 실행 방법
 1. ios, android 모두 Expo Go앱을 설치합니다.
 2. https://expo.dev/@herekim/yp-todo 에서 QR코드를 확인합니다.
